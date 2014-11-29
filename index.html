@@ -39,14 +39,77 @@
 <body>
     <div class="container">
         <!-- div's for output put here -->
+        <h3 style="text-align: center;">Euler (h = 0.1)</h3>
+        <div class="demo-container">
+            <div id="euler1" class="demo-placeholder"></div>
+        </div>
+
+        <h3 style="text-align: center;">Euler (h = 0.01)</h3>
+        <div class="demo-container">
+            <div id="euler2" class="demo-placeholder"></div>
+        </div>
+
+        <h3 style="text-align: center;">Euler error</h3>
+        <div class="demo-container">
+            <div id="euler3" class="demo-placeholder"></div>
+        </div>
     </div>
     <!-- All necessary scripts go here -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="http://yourjavascript.com/5022388132/jquery-flot-dashes.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
-    <script type="text/javascript" src="eiler.js"></script>
+    <script type="text/javascript" src="euler.js"></script>
     <script type="text/javascript" src="bashfort.js"></script>
     <!-- / All necessary scripts go here -->
+
+    <script>
+        var eulerData1 = [];
+        eulerData1.push({
+            points: {
+                show: true
+            },
+            legend: {
+                show: true
+            }
+        });
+        var eulerData2 = [];
+        eulerData2.push({
+            points: {
+                show: true
+            },
+            legend: {
+                show: true
+            }
+        });
+        var eulerData3 = [];
+        eulerData2.push({
+            points: {
+                show: true
+            },
+            legend: {
+                show: true
+            }
+        });
+
+        var eulerArr1 = euler(0.1, 10);
+        eulerData1.push({label: 'Analytical solution', color:'green', data: eulerArr1[0]});
+        eulerData1.push({label: 'Numerical solution', color:'blue', data: eulerArr1[1], dashes: { show: true }});
+
+        var eulerArr2 = euler(0.01, 10);
+        eulerData2.push({label: 'Analytical solution', color:'green', data: eulerArr2[0]});
+        eulerData2.push({label: 'Numerical solution', color:'blue', data: eulerArr2[1], dashes: { show: true }});
+
+        eulerData3.push({label: 'Error, h = 0.1', color:'green', data: eulerArr1[2]});
+        eulerData3.push({label: 'Error, h = 0.01', color:'blue', data: eulerArr2[2]});
+
+        /** Initialize all graphs */
+        $(document).ready(function() {
+            $.plot("#euler1", eulerData1);
+            $.plot("#euler2", eulerData2);
+            $.plot("#euler3", eulerData3);
+        });
+    </script>
 </body>
 
 </html>
