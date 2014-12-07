@@ -53,7 +53,22 @@
         <div class="demo-container">
             <div id="euler3" class="demo-placeholder"></div>
         </div>
-    </div>
+
+        <h3 style="text-align: center;">Adams-Bashfort (h = 0.1)</h3>
+        <div class="demo-container">
+            <div id="adamsBashfort1" class="demo-placeholder"></div>
+        </div>
+
+        <h3 style="text-align: center;">Adams-Bashfort (h = 0.01)</h3>
+        <div class="demo-container">
+            <div id="adamsBashfort2" class="demo-placeholder"></div>
+        </div>
+
+        <h3 style="text-align: center;">Adams-Bashfort error</h3>
+        <div class="demo-container">
+            <div id="adamsBashfort3" class="demo-placeholder"></div>
+        </div>
+	</div>
     <!-- All necessary scripts go here -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
@@ -103,11 +118,51 @@
         eulerData3.push({label: 'Error, h = 0.1', color:'green', data: eulerArr1[2]});
         eulerData3.push({label: 'Error, h = 0.01', color:'blue', data: eulerArr2[2]});
 
+        var adamsBashfort1 = [];
+        adamsBashfort1.push({
+            points: {
+                show: true
+            },
+            legend: {
+                show: true
+            }
+        });
+        var adamsBashfort2 = [];
+        adamsBashfort2.push({
+            points: {
+                show: true
+            },
+            legend: {
+                show: true
+            }
+        });
+        var adamsBashfort3 = [];
+        adamsBashfort3.push({
+            points: {
+                show: true
+            },
+            legend: {
+                show: true
+            }
+        });
+        var adamsBashfortArr = getAdamsBashfort(0.1, 10);
+        adamsBashfort1.push({label: 'Analytical solution', color:'green', data: adamsBashfortArr[0]});
+        adamsBashfort1.push({label: 'Numerical solution', color:'blue', data: adamsBashfortArr[1], dashes: { show: true }});
+        var adamsBashfortArr2 = euler(0.01, 10);
+        adamsBashfort2.push({label: 'Analytical solution', color:'green', data: adamsBashfortArr2[0]});
+        adamsBashfort2.push({label: 'Numerical solution', color:'blue', data: adamsBashfortArr2[1], dashes: { show: true }});
+
+        adamsBashfort3.push({label: 'Error, h = 0.1', color:'green', data: adamsBashfortArr[2]});
+        adamsBashfort3.push({label: 'Error, h = 0.01', color:'blue', data: adamsBashfortArr2[2]});
+		
         /** Initialize all graphs */
         $(document).ready(function() {
             $.plot("#euler1", eulerData1);
             $.plot("#euler2", eulerData2);
             $.plot("#euler3", eulerData3);
+            $.plot("#adamsBashfort1", adamsBashfort1);
+            $.plot("#adamsBashfort2", adamsBashfort2);
+            $.plot("#adamsBashfort3", adamsBashfort3);
         });
     </script>
 </body>
