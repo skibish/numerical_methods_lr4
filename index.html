@@ -54,17 +54,17 @@
             <div id="euler3" class="demo-placeholder"></div>
         </div>
 
-        <h3 style="text-align: center;">Adams-Bashfort (h = 0.1)</h3>
+        <h3 style="text-align: center;">Bashfort (h = 0.1)</h3>
         <div class="demo-container">
             <div id="adamsBashfort1" class="demo-placeholder"></div>
         </div>
 
-        <h3 style="text-align: center;">Adams-Bashfort (h = 0.01)</h3>
+        <h3 style="text-align: center;">Bashfort (h = 0.01)</h3>
         <div class="demo-container">
             <div id="adamsBashfort2" class="demo-placeholder"></div>
         </div>
 
-        <h3 style="text-align: center;">Adams-Bashfort error</h3>
+        <h3 style="text-align: center;">Bashfort error</h3>
         <div class="demo-container">
             <div id="adamsBashfort3" class="demo-placeholder"></div>
         </div>
@@ -148,13 +148,13 @@
         var adamsBashfortArr = getAdamsBashfort(0.1, 10);
         adamsBashfort1.push({label: 'Analytical solution', color:'green', data: adamsBashfortArr[0]});
         adamsBashfort1.push({label: 'Numerical solution', color:'blue', data: adamsBashfortArr[1], dashes: { show: true }});
-        var adamsBashfortArr2 = euler(0.01, 10);
+        var adamsBashfortArr2 = getAdamsBashfort(0.01, 10);
         adamsBashfort2.push({label: 'Analytical solution', color:'green', data: adamsBashfortArr2[0]});
         adamsBashfort2.push({label: 'Numerical solution', color:'blue', data: adamsBashfortArr2[1], dashes: { show: true }});
 
         adamsBashfort3.push({label: 'Error, h = 0.1', color:'green', data: adamsBashfortArr[2]});
         adamsBashfort3.push({label: 'Error, h = 0.01', color:'blue', data: adamsBashfortArr2[2]});
-		
+
         /** Initialize all graphs */
         $(document).ready(function() {
             $.plot("#euler1", eulerData1);

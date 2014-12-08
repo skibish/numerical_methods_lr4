@@ -19,21 +19,16 @@ function getAdamsBashfort(h, t)
     var t = h * i;
     xAnalytics[i] = defaultAnalytics(t);
 
-	if (i < 5) {
+	if (i < 4) {
 		// Euler formula
 		xSolution[i] = (xSolution[i - 1] + h * defaultDerivative(xSolution[i - 1]));
 	}
 	else {
-		// Adams formula
-		adams = (xSolution[i - 1] + h/24 *
-		(55 * defaultDerivative(xSolution[i - 1])
-		- 59 * defaultDerivative(xSolution[i - 2])
-		+ 37 * defaultDerivative(xSolution[i - 3])
-		-9  * defaultDerivative(xSolution[i - 4])));
-		
+    var eulerPoint = (xSolution[i - 1] + h * defaultDerivative(xSolution[i - 1]));
+
 		// Bashfort formula
 		xSolution[i] = (xSolution[i - 1] + h/24 *
-		(9 * adams
+		(9 * defaultDerivative(eulerPoint)
 		+ 19 * defaultDerivative(xSolution[i - 1])
 		- 5 * defaultDerivative(xSolution[i - 2])
 		+ defaultDerivative(xSolution[i - 3])));
@@ -43,7 +38,6 @@ function getAdamsBashfort(h, t)
     if(error[i] > errorMax) {
       errorMax = error[i];
     }
-
 
     pointsAnalytics.push([t, xAnalytics[i]]);
     pointsSolution.push([t, xSolution[i]]);
