@@ -27,11 +27,24 @@ function getAdamsBashfort(h, t)
     var eulerPoint = (xSolution[i - 1] + h * defaultDerivative(xSolution[i - 1]));
 
 		// Bashfort formula
-		xSolution[i] = (xSolution[i - 1] + h/24 *
+		var newX = (xSolution[i - 1] + h/24 *
 		(9 * defaultDerivative(eulerPoint)
 		+ 19 * defaultDerivative(xSolution[i - 1])
 		- 5 * defaultDerivative(xSolution[i - 2])
 		+ defaultDerivative(xSolution[i - 3])));
+
+    var k = 10;
+    while(k != 0) {
+      var tmp = newX;
+      newX = (xSolution[i - 1] + h/24 *
+      (9 * defaultDerivative(tmp)
+      + 19 * defaultDerivative(xSolution[i - 1])
+      - 5 * defaultDerivative(xSolution[i - 2])
+      + defaultDerivative(xSolution[i - 3])));
+
+      k--;
+    }
+    xSolution[i] = newX;
 	}
 
     error.push([t, Math.abs(xSolution[i] - xAnalytics[i])]);
